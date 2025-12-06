@@ -65,7 +65,7 @@ export default function Footer() {
                             <a
                                 href={siteConfig.whatsappLink}
                                 className="text-primary hover:underline"
-                                onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Footer Link' })}
+                                onClick={() => sendGAEvent({ event: 'whatsapp_click', value: 'Footer Link' })}
                             >
                                 Chat with us on WhatsApp
                             </a>

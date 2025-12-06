@@ -48,7 +48,7 @@ export default function Header() {
                     <Button
                         className="px-6 py-2 text-sm h-auto"
                         onClick={() => {
-                            sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Header Button' });
+                            sendGAEvent({ event: 'whatsapp_click', value: 'Header Button' });
                             window.open(siteConfig.whatsappLink, '_blank');
                         }}
                     >

@@ -150,7 +150,7 @@ export default function CompareAndCTA() {
                             href={siteConfig.whatsappLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Bottom CTA' })}
+                            onClick={() => sendGAEvent({ event: 'whatsapp_click', value: 'Bottom CTA' })}
                         >
                             <Button className="text-lg px-12 py-4">
                                 {siteConfig.cta.main}

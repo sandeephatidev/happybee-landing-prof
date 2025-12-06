@@ -44,9 +44,9 @@ export default function Hero() {
                             href={siteConfig.whatsappLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Hero CTA' })}
+                            onClick={() => sendGAEvent({ event: 'whatsapp_click', value: 'Hero CTA' })}
                         >
-                            <Button>
+                            <Button variant="whatsapp">
                                 Join WhatsApp Group <ArrowRight size={18} />
                             </Button>
                         </a>

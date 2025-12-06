@@ -199,7 +199,7 @@ export default function Products() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="block"
-                                        onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Product Card CTA', product_name: product.title })}
+                                        onClick={() => sendGAEvent({ event: 'whatsapp_click', value: 'Product Card CTA', product_name: product.title })}
                                     >
                                         <Button className="w-full justify-center text-sm py-3" variant="primary" icon={<ShoppingBag size={16} />}>
                                             Order via WhatsApp
