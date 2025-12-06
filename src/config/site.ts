@@ -4,7 +4,7 @@ export const siteConfig = {
 
     hero: {
         headline: "High-Performance Nutrition for",
-        highlight: "High-Performance Professionals",
+        highlight: "High-Performance Leaders",
         subhead: "Busy schedule? Don't compromise on health. Join the exclusive group-buy network for working professionals. Sourced by nutritionists, delivered for your convenience.",
     },
 

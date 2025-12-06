@@ -1,6 +1,8 @@
 'use client';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState } from 'react';
+import { sendGAEvent } from '@next/third-parties/google';
+import Image from 'next/image';
 import Button from './Button';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/site';
@@ -27,8 +29,14 @@ export default function Header() {
                 scrolled ? "bg-black/60 backdrop-blur-md border border-white/10 p-4" : "bg-transparent p-0"
             )}>
                 <nav className="flex items-center justify-between">
-                    <div className="text-2xl font-bold tracking-tighter">
-                        Happy<span className="text-primary">Bee</span>
+                    <div className="relative h-12 w-48">
+                        <Image
+                            src="/happybee-logo.png"
+                            alt="HappyBee"
+                            fill
+                            className="object-contain object-left"
+                            priority
+                        />
                     </div>
 
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
@@ -39,7 +47,10 @@ export default function Header() {
 
                     <Button
                         className="px-6 py-2 text-sm h-auto"
-                        onClick={() => window.open(siteConfig.whatsappLink, '_blank')}
+                        onClick={() => {
+                            sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Header Button' });
+                            window.open(siteConfig.whatsappLink, '_blank');
+                        }}
                     >
                         Join Network
                     </Button>

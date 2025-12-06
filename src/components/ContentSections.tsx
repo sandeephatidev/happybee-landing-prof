@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { User, Users, Store, TrendingDown, Clock, ShieldCheck } from 'lucide-react';
+import { sendGAEvent } from '@next/third-parties/google';
 import Button from './Button';
 import { siteConfig } from '@/config/site';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
@@ -138,14 +139,19 @@ export default function CompareAndCTA() {
 
                     <div className="p-8 glass-panel inline-block rounded-2xl mb-8">
                         <img
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(siteConfig.whatsappLink)}`}
+                            src="/qrcode-ipl.jpeg"
                             alt="QR Code"
                             className="w-48 h-48 rounded-lg"
                         />
                     </div>
 
                     <div>
-                        <a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer">
+                        <a
+                            href={siteConfig.whatsappLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Bottom CTA' })}
+                        >
                             <Button className="text-lg px-12 py-4">
                                 {siteConfig.cta.main}
                             </Button>

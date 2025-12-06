@@ -1,5 +1,7 @@
 'use client';
 import { Facebook, Instagram, Twitter, Mail, ArrowRight } from 'lucide-react';
+import { sendGAEvent } from '@next/third-parties/google';
+import Image from 'next/image';
 import { siteConfig } from '@/config/site';
 
 export default function Footer() {
@@ -12,8 +14,13 @@ export default function Footer() {
                 <div className="grid md:grid-cols-4 gap-12 mb-16">
                     {/* Brand Column */}
                     <div className="md:col-span-2">
-                        <div className="text-2xl font-bold tracking-tighter text-white mb-6">
-                            Happy<span className="text-primary">Bee</span>
+                        <div className="relative h-12 w-48 mb-6">
+                            <Image
+                                src="/happybee-logo.png"
+                                alt="HappyBee"
+                                fill
+                                className="object-contain object-left"
+                            />
                         </div>
                         <p className="max-w-sm mb-8 leading-relaxed">
                             We are a community-led movement delivering premium, nutritionist-approved essentials directly to you. Better prices. Better health. Together.
@@ -55,7 +62,13 @@ export default function Footer() {
                         </div>
                         <div className="mt-8 text-sm">
                             <p>Have questions?</p>
-                            <a href={siteConfig.whatsappLink} className="text-primary hover:underline">Chat with us on WhatsApp</a>
+                            <a
+                                href={siteConfig.whatsappLink}
+                                className="text-primary hover:underline"
+                                onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Footer Link' })}
+                            >
+                                Chat with us on WhatsApp
+                            </a>
                         </div>
                     </div>
                 </div>

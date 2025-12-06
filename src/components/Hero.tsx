@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { sendGAEvent } from '@next/third-parties/google';
 import Button from './Button';
 import { ArrowRight, Star } from 'lucide-react';
 import { siteConfig } from '@/config/site';
@@ -39,7 +40,12 @@ export default function Hero() {
                     </p>
 
                     <div className="flex flex-wrap gap-4 pt-4">
-                        <a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer">
+                        <a
+                            href={siteConfig.whatsappLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => sendGAEvent('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'Hero CTA' })}
+                        >
                             <Button>
                                 Join WhatsApp Group <ArrowRight size={18} />
                             </Button>
@@ -83,7 +89,7 @@ export default function Hero() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 1 }}
-                            className="absolute -top-6 -right-6 md:-right-10 bg-black/60 backdrop-blur-md border border-primary/20 p-2 pr-6 rounded-full flex items-center gap-3 shadow-2xl"
+                            className="absolute -bottom-6 -right-6 md:-right-10 bg-black/60 backdrop-blur-md border border-primary/20 p-2 pr-6 rounded-full flex items-center gap-3 shadow-2xl"
                         >
                             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-2xl shadow-inner">
                                 👩‍⚕️
