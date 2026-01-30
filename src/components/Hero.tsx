@@ -2,11 +2,22 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { sendGAEvent } from '@next/third-parties/google';
+import { useState, useEffect } from 'react';
 import Button from './Button';
 import { ArrowRight, Star } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 
 export default function Hero() {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const heroImages = ['/hero-image.png', '/hero-2.png'];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+        }, 5000); // Change image every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [heroImages.length]);
     return (
         <section id="home" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
             {/* Background Gradient Blob */}
@@ -25,7 +36,7 @@ export default function Hero() {
                         transition={{ delay: 0.2 }}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium"
                     >
-                        <Star size={14} fill="currentColor" /> Premium Group-Buy for Professionals
+                        <Star size={14} fill="currentColor" /> Premium healthy products
                     </motion.div>
 
                     <h1 className="text-5xl md:text-5xl font-bold leading-tight tracking-tight">
@@ -75,14 +86,49 @@ export default function Hero() {
                     className="relative"
                 >
                     <div className="relative z-10 animate-[float_6s_ease-in-out_infinite]">
-                        <Image
-                            src="/hero-image.png"
-                            alt="Premium Healthy Products"
-                            width={600}
-                            height={600}
-                            className="rounded-3xl shadow-[0_0_50px_rgba(247,185,147,0.2)]"
-                            priority
-                        />
+                        {/* Image Slider */}
+                        <div className="relative overflow-hidden rounded-3xl">
+                            {heroImages.map((image, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: currentSlide === idx ? 1 : 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="absolute inset-0"
+                                >
+                                    <Image
+                                        src={image}
+                                        alt="Premium Healthy Products"
+                                        width={600}
+                                        height={600}
+                                        className="w-full h-full object-cover rounded-3xl shadow-[0_0_50px_rgba(247,185,147,0.2)]"
+                                        priority={idx === 0}
+                                    />
+                                </motion.div>
+                            ))}
+                            <Image
+                                src={heroImages[currentSlide]}
+                                alt="Premium Healthy Products"
+                                width={600}
+                                height={600}
+                                className="rounded-3xl shadow-[0_0_50px_rgba(247,185,147,0.2)]"
+                                priority
+                            />
+                        </div>
+
+                        {/* Slider Indicators */}
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                            {heroImages.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setCurrentSlide(idx)}
+                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                        currentSlide === idx ? 'bg-primary w-6' : 'bg-white/50 hover:bg-white/80'
+                                    }`}
+                                    aria-label={`Go to slide ${idx + 1}`}
+                                />
+                            ))}
+                        </div>
 
                         {/* Floating Badge */}
                         <motion.div

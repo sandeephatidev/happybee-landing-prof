@@ -1,13 +1,43 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Check, Leaf, ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Check, Leaf, ShoppingBag } from 'lucide-react';
 import { sendGAEvent } from '@next/third-parties/google';
-import { useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Button from './Button';
 import { siteConfig } from '@/config/site';
 
 const products = [
+    {
+        id: 4,
+        title: "Sweet Heart Sprouts Mix",
+        desc: "Crunchy, fresh, and protein-packed goodness.",
+        image: "/sprouts-mix.png",
+        icon: "🌱",
+        badge: "Fresh Daily",
+        brandLogo: "/tcc-logo.png",
+        brandName: "The Chutney Club",
+        benefits: ["High protein & fiber", "Rich in antioxidants", "Ready to eat"],
+        ingredients: "Moong, Chana, & Seasonal Beans",
+        price: 90,
+        strikePrice: 120,
+        quantity: "100g"
+    },
+    {
+        id: 9,
+        title: "Fruit Pop Veggie Salad",
+        desc: "A colorful and refreshing mix of fresh fruits and vegetables.",
+        image: "/fruit-pop.png",
+        icon: "🥗",
+        badge: "Fresh & Healthy",
+        brandLogo: "/tcc-logo.png",
+        brandName: "The Chutney Club",
+        benefits: ["Rich in vitamins", "Low calorie snack", "All-natural ingredients"],
+        ingredients: "Mixed fresh fruits, organic vegetables, natural preservatives",
+        price: 90,
+        strikePrice: 120,
+        quantity: "200g"
+    },
     {
         id: 5,
         title: "Nuts & Seeds Masala Mix",
@@ -15,18 +45,58 @@ const products = [
         image: "/nuts-seeds-mix.png",
         icon: "🥜",
         badge: "Bestseller",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["Weight management support", "Boosts energy", "Aids digestion"],
-        ingredients: "Almonds, cashews, peanuts, flaxseed, pumpkin seed..."
+        ingredients: "Almonds, cashews, peanuts, flaxseed, pumpkin seed...",
+        price: 150,
+        strikePrice: 200,
+        quantity: "200g"
     },
     {
-        id: 4,
-        title: "Fresh Sprouts Mix",
-        desc: "Crunchy, fresh, and protein-packed goodness.",
-        image: "/sprouts-mix.png",
-        icon: "🌱",
-        badge: "Fresh Daily",
-        benefits: ["High protein & fiber", "Rich in antioxidants", "Ready to eat"],
-        ingredients: "Moong, Chana, & Seasonal Beans"
+        id: 12,
+        title: "Kaju Pepperia",
+        desc: "Spicy and savory roasted cashews with peppery notes.",
+        image: "/kaju-pepper.png",
+        icon: "🥜",
+        badge: "Spicy Twist",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
+        benefits: ["Rich in minerals", "Boosts immunity", "Flavorful snack"],
+        ingredients: "Premium cashews, black pepper, sea salt",
+        price: 150,
+        strikePrice: 200,
+        quantity: "100g"
+    },
+    {
+        id: 10,
+        title: "Badam-e-Namak",
+        desc: "Delicious roasted almonds with a perfect salt blend.",
+        image: "/salted-badam.png",
+        icon: "🌰",
+        badge: "Premium Snack",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
+        benefits: ["Rich in calcium", "High in protein", "Perfect snacking"],
+        ingredients: "Premium almonds, sea salt, natural spices",
+        price: 150,
+        strikePrice: 200,
+        quantity: "100g"
+    },
+    {
+        id: 11,
+        title: "Sunny Seed Bites",
+        desc: "Sunflower seeds with a crispy, delightful crunch.",
+        image: "/sunny-seeds.png",
+        icon: "🌻",
+        badge: "Energy Booster",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
+        benefits: ["Rich in Vitamin E", "Heart healthy", "Natural energy"],
+        ingredients: "Sunflower seeds, sea salt, organic spices",
+        price: 150,
+        strikePrice: 200,
+        quantity: "100g"
     },
     {
         id: 7,
@@ -35,8 +105,13 @@ const products = [
         image: "/smoothie-mix.png",
         icon: "🥤",
         badge: "Breakfast Special",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["Instant energy", "Gut-friendly fiber", "Hormonal balance"],
-        ingredients: "Premium nut blend, lactose-free, GMO-free"
+        ingredients: "Premium nut blend, lactose-free, GMO-free",
+        price: 150,
+        strikePrice: 200,
+        quantity: "200g"
     },
     {
         id: 8,
@@ -45,8 +120,13 @@ const products = [
         image: "/gut-powder.png",
         icon: "🧉",
         badge: "Probiotic",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["Probiotic + prebiotic", "Reduces bloating", "Improves gut flora"],
-        ingredients: "Proprietary probiotic blend, natural fibers"
+        ingredients: "Proprietary probiotic blend, natural fibers",
+        price: 150,
+        strikePrice: 200,
+        quantity: "200g"
     },
     {
         id: 1,
@@ -55,8 +135,13 @@ const products = [
         image: "/groundnut-oil.png",
         icon: "🥜",
         badge: "Cold Pressed",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["Heart healthy monounsaturated fats", "High smoke point for frying", "Rich nutty aroma"],
-        ingredients: "100% Premium Groundnuts"
+        ingredients: "100% Premium Groundnuts",
+        price: 400,
+        strikePrice: 600,
+        quantity: "1 litre"
     },
     {
         id: 2,
@@ -65,8 +150,13 @@ const products = [
         image: "/coconut-oil.png",
         icon: "🥥",
         badge: "Cold Pressed",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["Excellent for skin & hair", "Boosts metabolism", "Rich in lauric acid"],
-        ingredients: "Sun-dried Coconuts"
+        ingredients: "Sun-dried Coconuts",
+        price: 600,
+        strikePrice: 800,
+        quantity: "1 Litre"
     },
     {
         id: 3,
@@ -75,8 +165,13 @@ const products = [
         image: "/sunflower-oil.png",
         icon: "🌻",
         badge: "Wood Pressed",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["Rich in Vitamin E", "Easy to digest", "Neutral flavor profile"],
-        ingredients: "Premium Sunflower Seeds"
+        ingredients: "Premium Sunflower Seeds",
+        price: 400,
+        strikePrice: 600,
+        quantity: "1 Litre"
     },
     {
         id: 6,
@@ -85,21 +180,24 @@ const products = [
         image: "/nutri-mix.png",
         icon: "🌾",
         badge: "Gluten Conscious",
+        brandLogo: "/uw-logo.png",
+        brandName: "Urthwise",
         benefits: ["High in fiber", "Supports digestion", "Gluten-reduced"],
-        ingredients: "Flaxseed, pumpkin seed, melon seed, almond, gram flour..."
+        ingredients: "Flaxseed, pumpkin seed, melon seed, almond, gram flour...",
+        price: 150,
+        strikePrice: 200,
+        quantity: "200g"
     }
 ];
 
 export default function Products() {
-    const scrollRef = useRef<HTMLDivElement>(null);
+    const [displayCount, setDisplayCount] = useState(3);
 
-    const scroll = (direction: 'left' | 'right') => {
-        if (scrollRef.current) {
-            const { current } = scrollRef;
-            const scrollAmount = direction === 'left' ? -350 : 350;
-            current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
+    const handleShowMore = () => {
+        setDisplayCount(prevCount => prevCount + 3);
     };
+
+    const displayedProducts = products.slice(0, displayCount);
 
     return (
         <section id="products" className="py-24 bg-surface text-white relative">
@@ -117,37 +215,17 @@ export default function Products() {
                 </motion.div>
             </div>
 
-            {/* Horizontal Scroll Container */}
-            <div className="relative group container mx-auto">
-                {/* Scroll Controls (Overlay) */}
-                <button
-                    onClick={() => scroll('left')}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-black/50 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-black/70"
-                    aria-label="Scroll left"
-                >
-                    <ChevronLeft size={24} />
-                </button>
-                <button
-                    onClick={() => scroll('right')}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-black/50 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:bg-black/70"
-                    aria-label="Scroll right"
-                >
-                    <ChevronRight size={24} />
-                </button>
-
-                <div
-                    ref={scrollRef}
-                    className="flex overflow-x-auto gap-8 px-6 pb-12 snap-x scrollbar-hide"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                >
-                    {products.map((product, idx) => (
+            {/* Grid Layout */}
+            <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {displayedProducts.map((product, idx) => (
                         <motion.div
                             key={product.id}
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="min-w-[300px] md:min-w-[380px] snap-center bg-accent rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border border-primary/20 hover:border-primary flex flex-col h-auto"
+                            className="bg-accent rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border border-primary/20 hover:border-primary flex flex-col h-full"
                         >
                             {/* Image Section - Conditional Rendering */}
                             <div className="relative h-48 w-full bg-white/5 overflow-hidden group flex items-center justify-center">
@@ -169,6 +247,29 @@ export default function Products() {
                                         {product.badge}
                                     </div>
                                 )}
+
+                                {product.brandLogo && (
+                                    <div className="absolute top-4 left-4 bg-white/90 rounded-lg w-14 h-14 flex items-center justify-center z-10">
+                                        <Image
+                                            src={product.brandLogo}
+                                            alt={product.brandName}
+                                            width={48}
+                                            height={48}
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                )}
+
+                                {/* Price Overlay - Bottom */}
+                                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
+                                    <div className="flex items-center gap-2 bg-black/50 backdrop-blur-sm px-2 py-1 rounded-lg">
+                                        <span className="text-lg font-bold text-primary">₹{product.price}</span>
+                                        <span className="text-xs text-gray-300 line-through">₹{product.strikePrice}</span>
+                                    </div>
+                                    <span className="text-xs font-semibold bg-black/50 backdrop-blur-sm text-primary px-2 py-1 rounded-lg">
+                                        {product.quantity}
+                                    </span>
+                                </div>
                             </div>
 
                             <div className="p-5 flex flex-col justify-between flex-grow bg-accent text-black">
@@ -195,7 +296,7 @@ export default function Products() {
                                     </p>
 
                                     <a
-                                        href={siteConfig.whatsappLink}
+                                        href={siteConfig.whatsAppCatalogueLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="block"
@@ -209,10 +310,24 @@ export default function Products() {
                             </div>
                         </motion.div>
                     ))}
-
-                    {/* Padding element for right side scrolling */}
-                    <div className="min-w-[1px] h-full" />
                 </div>
+
+                {/* Show More Button */}
+                {displayCount < products.length && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="flex justify-center mt-12"
+                    >
+                        <button
+                            onClick={handleShowMore}
+                            className="px-8 py-3 bg-primary text-black font-bold rounded-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+                        >
+                            Show More Products
+                        </button>
+                    </motion.div>
+                )}
             </div>
         </section>
     );

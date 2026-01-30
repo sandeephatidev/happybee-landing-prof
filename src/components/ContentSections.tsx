@@ -132,7 +132,7 @@ export default function CompareAndCTA() {
             {/* CTA Section */}
             <section id="join" className="py-24 bg-gradient-to-b from-black to-surface text-center">
                 <div className="container mx-auto px-6 max-w-3xl">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Join the Revolution</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Join the Healthy Network</h2>
                     <p className="text-xl text-gray-400 mb-12">
                         Be part of an exclusive community helping us validate this new way of buying healthier essentials—at better prices.
                     </p>

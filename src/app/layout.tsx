@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HappyBee - Premium Group-Buy",
+  title: "HappyBee - Premium Healthy products",
   description: "Join the exclusive community for better health at better prices.",
   metadataBase: new URL('https://happybee.in'), // Update with your actual domain
 
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://happybee.in',
     siteName: 'HappyBee',
-    title: 'HappyBee - Premium Group-Buy for Health-Conscious Professionals',
+    title: 'HappyBee - Premium Healthy products',
     description: 'Join the exclusive community for better health at better prices. High-performance nutrition sourced by nutritionists, delivered for your convenience.',
     images: [
       {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   // Twitter Card metadata
   twitter: {
     card: 'summary_large_image',
-    title: 'HappyBee - Premium Group-Buy',
+    title: 'HappyBee - Premium Healthy products',
     description: 'Join the exclusive community for better health at better prices.',
     images: ['/happybee-logo.png'],
   },
