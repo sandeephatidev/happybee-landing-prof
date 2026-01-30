@@ -9,7 +9,7 @@ import { siteConfig } from '@/config/site';
 
 export default function Hero() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const heroImages = ['/hero-image.png', '/hero-2.png'];
+    const heroImages = ['/hero-image.png', '/hero-2.png', '/hero-3.png'];
 
     useEffect(() => {
         const interval = setInterval(() => {
