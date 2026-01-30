@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "HappyBee - Premium Healthy products",
-  description: "Join the exclusive community for better health at better prices.",
+  description: "Join the exclusive community for better health at affordable prices.",
   metadataBase: new URL('https://happybee.in'), // Update with your actual domain
 
   // Icons for browser and search
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     url: 'https://happybee.in',
     siteName: 'HappyBee',
     title: 'HappyBee - Premium Healthy products',
-    description: 'Join the exclusive community for better health at better prices. High-performance nutrition sourced by nutritionists, delivered for your convenience.',
+    description: 'Join the exclusive community for better health at affordable prices. High-performance nutrition sourced by nutritionists, delivered for your convenience.',
     images: [
       {
         url: '/happybee-logo.png',
@@ -51,12 +51,12 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'HappyBee - Premium Healthy products',
-    description: 'Join the exclusive community for better health at better prices.',
+    description: 'Join the exclusive community for better health at affordable prices.',
     images: ['/happybee-logo.png'],
   },
 
   // Additional SEO
-  keywords: ['group buy', 'health food', 'nutrition', 'working professionals', 'premium nutrition', 'healthy snacks'],
+  keywords: ['healthy salads', 'health food', 'nutrition', 'masala nuts', 'premium nutrition', 'healthy snacks'],
   authors: [{ name: 'HappyBee' }],
   creator: 'HappyBee',
   publisher: 'HappyBee',

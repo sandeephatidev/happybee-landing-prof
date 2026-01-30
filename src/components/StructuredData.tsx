@@ -23,7 +23,7 @@ export default function StructuredData() {
         "@type": "WebSite",
         "name": "HappyBee",
         "url": "https://happybee.in",
-        "description": "Join the exclusive community for better health at better prices.",
+        "description": "Join the exclusive community for better health at affordable prices.",
         "publisher": {
             "@type": "Organization",
             "name": "HappyBee",

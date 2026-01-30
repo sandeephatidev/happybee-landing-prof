@@ -23,7 +23,7 @@ export default function Footer() {
                             />
                         </div>
                         <p className="max-w-sm mb-8 leading-relaxed">
-                            We are a community-led movement delivering premium, nutritionist-approved essentials directly to you. Better prices. Better health. Together.
+                            We are a community-led platform delivering premium, nutritionist-approved essentials directly to you. Better prices. Better health. Together.
                         </p>
                         <div className="flex gap-4">
                             {[Instagram, Facebook, Twitter, Mail].map((Icon, i) => (
